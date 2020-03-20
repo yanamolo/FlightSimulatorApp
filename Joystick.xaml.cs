@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace firstproject.Controls
+namespace FlightSimulatorApp.controls
 {
     /// <summary>
     /// Interaction logic for Joystick.xaml
@@ -41,7 +41,7 @@ namespace firstproject.Controls
             {
                 x1 = e.GetPosition(this).X - x;
                 y1 = e.GetPosition(this).Y - y;
-                if (length(x1, y1, 0, 0) < Base.Width / 3)
+                if (length(x1, y1, 0, 0) < Base.Width / 4)
                 {
                     knobPosition.X = x1;
                     knobPosition.Y = y1;
