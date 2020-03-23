@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using firstproject;
+using System.ComponentModel;
 
-namespace FlightSimulatorApp
+namespace firstproject
 {
     class FlightModel : IModel
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         IClient telnetClient;
         volatile Boolean stop;
         //Propreties
@@ -49,9 +51,22 @@ namespace FlightSimulatorApp
             {
                 while (!stop)
                 {
-                    telnetClient.Write("get ??");
-                    //LeftSonar = Double.Parse(telnetClient.Read());
-                    // the same for the other sensors properties
+                    telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
+                    Indicated_heading_deg = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/gps/indicated-vertical-speed\n");
+                    Gps_indicated_vertical_speed = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/gps/indicated-ground-speed-kt\n");
+                    Gps_indicated_ground_speed_kt = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/altimeter/indicated-altitude-ft\n");
+                    Altimeter_indicated_altitude_ft = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
+                    Attitude_indicator_internal_pitch_deg = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
+                    Attitude_indicator_internal_roll_deg = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/gps/indicated-altitude-ft\n");
+                    Gps_indicated_altitude_ft = Double.Parse(telnetClient.Read());
+                    telnetClient.Write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
+                    Airspeed_indicator_indicated_speed_kt = Double.Parse(telnetClient.Read());
                     Thread.Sleep(250);// read the data in 4Hz
                 }
             }).Start();
@@ -229,10 +244,7 @@ namespace FlightSimulatorApp
         public event propretyChangedEventHandler PropretyChanged;
         public void NotifyPropretyChanged(string propName)
         {
-            if (this.PropretyChanged != null)
-            {
-                // this.PropretyChanged(this, new PropretyChangedEventArgs(propName));
-            }
+            PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         /* void moveAilrone()
              {

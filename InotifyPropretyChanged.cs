@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightSimulatorApp
+namespace firstproject
 {
     public delegate void propretyChangedEventHandler(object sender, EventArgs e);
     interface InotifyPropretyChanged

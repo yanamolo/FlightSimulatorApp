@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightSimulatorApp
+namespace firstproject
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class MainWindow : Window
     {
+        VMFlight vm;
         public MainWindow()
         {
+            vm = new VMFlight(new FlightModel(new Client()));
+            DataContext = vm;
             InitializeComponent();
+            vm.connect();
+            vm.start();
         }
     }
 }
