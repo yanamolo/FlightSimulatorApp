@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 
 
-namespace firstproject
+namespace FlightSimulatorApp
 {
     class Client : IClient
     {

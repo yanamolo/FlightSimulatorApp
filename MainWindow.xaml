@@ -1,10 +1,10 @@
-﻿<Window x:Class="firstproject.MainWindow"
+﻿<Window x:Class="FlightSimulatorApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Controls="clr-namespace:firstproject.Controls"
-        xmlns:local="clr-namespace:firstproject"
+        xmlns:Controls="clr-namespace:FlightSimulatorApp.controls"
+        xmlns:local="clr-namespace:FlightSimulatorApp"
         mc:Ignorable="d"
         Title="Flight-Gear" Height="800" Width="1100">
     <Grid RenderTransformOrigin="0.49,0.502" Margin="10,10,0.333,-0.333">

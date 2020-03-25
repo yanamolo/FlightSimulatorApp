@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace firstproject
+namespace FlightSimulatorApp
 {
     class VMFlight : IViewModel
     {
@@ -24,10 +24,14 @@ namespace firstproject
                 NotifyPropretyChanged("VM_" + e.PropertyName);
             };
         }
-        public event propretyChangedEventHandler PropretyChanged;
+        public event PropertyChangedEventHandler PropretyChanged;
         public void NotifyPropretyChanged(string propName)
         {
-            PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            if (PropretyChanged != null)
+            {
+                this.PropretyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+            //PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         //propreties
         public double VM_Indicated_heading_deg

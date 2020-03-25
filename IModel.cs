@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace firstproject
+namespace FlightSimulatorApp
 {
-    interface IModel: InotifyPropretyChanged
+    interface IModel
     {
         // connection to the robot
         void connect(string IP, int port);

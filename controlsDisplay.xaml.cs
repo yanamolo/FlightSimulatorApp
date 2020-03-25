@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace firstproject.Controls
+namespace FlightSimulatorApp.controls
 {
     /// <summary>
     /// Interaction logic for controlsDisplay.xaml

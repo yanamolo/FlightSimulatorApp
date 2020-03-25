@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using firstproject;
+using FlightSimulatorApp;
 using System.ComponentModel;
 
-namespace firstproject
+namespace FlightSimulatorApp
 {
     class FlightModel : IModel
     {
@@ -241,10 +241,14 @@ namespace firstproject
             }
         }
 
-        public event propretyChangedEventHandler PropretyChanged;
+        public event PropertyChangedEventHandler PropretyChanged;
         public void NotifyPropretyChanged(string propName)
         {
-            PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+            //PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         /* void moveAilrone()
              {
