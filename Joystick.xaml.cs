@@ -9,11 +9,12 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightSimulatorApp.controls
+namespace FlightSimulatorApp.Controls
 {
     /// <summary>
     /// Interaction logic for Joystick.xaml
@@ -26,7 +27,9 @@ namespace FlightSimulatorApp.controls
         {
             InitializeComponent();
         }
-        private void CenterKnob_Completed(object sender, EventArgs e) { }
+        private void CenterKnob_Completed(object sender, EventArgs e) {
+            Storyboard sb = (Storyboard)this.FindResource(this);
+        }
 
         private double length(double x, double y, double x1, double y1)
         {
@@ -41,7 +44,7 @@ namespace FlightSimulatorApp.controls
             {
                 x1 = e.GetPosition(this).X - x;
                 y1 = e.GetPosition(this).Y - y;
-                if (length(x1, y1, 0, 0) < Base.Width / 4)
+                if (length(x1, y1, 0, 0) < Base.Width / 3)
                 {
                     knobPosition.X = x1;
                     knobPosition.Y = y1;

@@ -7,31 +7,26 @@ using System.ComponentModel;
 
 namespace FlightSimulatorApp
 {
-    class VMFlight : IViewModel
+    class VMFlight : INotifyPropertyChanged
     {
         private int port = 5402;
         private string ip = "127.0.0.1";
-        private double ailrone;
-        private double elevator;
-        private double rudder;
-        private double throttle;
-        FlightModel model;
+        private FlightModel model;
         public VMFlight(FlightModel m)
         {
             this.model = m;
-            model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropretyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM_" + e.PropertyName);
             };
         }
-        public event PropertyChangedEventHandler PropretyChanged;
-        public void NotifyPropretyChanged(string propName)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propName)
         {
-            if (PropretyChanged != null)
-            {
-                this.PropretyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-            //PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+
         }
         //propreties
         public double VM_Indicated_heading_deg
@@ -90,16 +85,48 @@ namespace FlightSimulatorApp
                 return model.Altimeter_indicated_altitude_ft;
             }
         }
-        public double VM_ailron
+        public double VM_Throttle
         {
             get
             {
-                return ailrone;
+                return model.Throttle;
             }
             set
             {
-                ailrone = value;
-                //model.
+                model.Throttle = value;
+            }
+        }
+        public double VM_Rudder
+        {
+            get
+            {
+                return model.Rudder;
+            }
+            set
+            {
+                model.Rudder = value;
+            }
+        }
+        public double VM_Elevator
+        {
+            get
+            {
+                return model.Elevator;
+            }
+            set
+            {
+                model.Elevator = value;
+            }
+        }
+        public double VM_Ailrone
+        {
+            get
+            {
+                return model.Ailrone;
+            }
+            set
+            {
+                model.Ailrone = value;
             }
         }
 

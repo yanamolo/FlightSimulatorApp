@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace FlightSimulatorApp
 {
-    interface IModel
+    interface IModel: INotifyPropertyChanged
     {
         // connection to the robot
         void connect(string IP, int port);

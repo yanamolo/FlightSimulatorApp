@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using FlightSimulatorApp;
 using System.ComponentModel;
+using System.Threading;
 
 namespace FlightSimulatorApp
 {
     class FlightModel : IModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         IClient telnetClient;
         volatile Boolean stop;
         //Propreties
@@ -51,23 +45,31 @@ namespace FlightSimulatorApp
             {
                 while (!stop)
                 {
-                    telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
-                    Indicated_heading_deg = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/gps/indicated-vertical-speed\n");
-                    Gps_indicated_vertical_speed = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/gps/indicated-ground-speed-kt\n");
-                    Gps_indicated_ground_speed_kt = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/altimeter/indicated-altitude-ft\n");
-                    Altimeter_indicated_altitude_ft = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/attitude-indicator/internal-pitch-deg\n");
-                    Attitude_indicator_internal_pitch_deg = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/attitude-indicator/internal-roll-deg\n");
-                    Attitude_indicator_internal_roll_deg = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/gps/indicated-altitude-ft\n");
-                    Gps_indicated_altitude_ft = Double.Parse(telnetClient.Read());
-                    telnetClient.Write("get /instrumentation/airspeed-indicator/indicated-speed-kt\n");
-                    Airspeed_indicator_indicated_speed_kt = Double.Parse(telnetClient.Read());
-                    Thread.Sleep(250);// read the data in 4Hz
+                    try
+                    {
+                        telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
+                        Indicated_heading_deg = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/gps/indicated-vertical-speed\r\n");
+                        Gps_indicated_vertical_speed = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/gps/indicated-ground-speed-kt\r\n");
+                        Gps_indicated_ground_speed_kt = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/altimeter/indicated-altitude-ft\r\n");
+                        Altimeter_indicated_altitude_ft = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/attitude-indicator/internal-pitch-deg\r\n");
+                        Attitude_indicator_internal_pitch_deg = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/attitude-indicator/internal-roll-deg\r\n");
+                        Attitude_indicator_internal_roll_deg = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/gps/indicated-altitude-ft\r\n");
+                        Gps_indicated_altitude_ft = Double.Parse(telnetClient.Read());
+                        telnetClient.Write("get /instrumentation/airspeed-indicator/indicated-speed-kt\r\n");
+                        Airspeed_indicator_indicated_speed_kt = Double.Parse(telnetClient.Read());
+                        Thread.Sleep(250);// read the data in 4Hz 
+                    }
+                    catch (Exception e)
+                    {
+                        this.telnetClient.flush();
+                        continue;
+                    }
                 }
             }).Start();
         }
@@ -81,7 +83,7 @@ namespace FlightSimulatorApp
             set
             {
                 indicated_heading_deg = value;
-                NotifyPropretyChanged("Indicated_heading_deg");
+                NotifyPropertyChanged("Indicated_heading_deg");
             }
         }
         public double Gps_indicated_vertical_speed
@@ -93,7 +95,7 @@ namespace FlightSimulatorApp
             set
             {
                 gps_indicated_vertical_speed = value;
-                NotifyPropretyChanged("Gps_indicated_vertical_speed");
+                NotifyPropertyChanged("Gps_indicated_vertical_speed");
             }
         }
         public double Gps_indicated_ground_speed_kt
@@ -105,7 +107,7 @@ namespace FlightSimulatorApp
             set
             {
                 gps_indicated_ground_speed_kt = value;
-                NotifyPropretyChanged("Gps_indicated_ground_speed_kt");
+                NotifyPropertyChanged("Gps_indicated_ground_speed_kt");
             }
         }
         public double Airspeed_indicator_indicated_speed_kt
@@ -117,7 +119,7 @@ namespace FlightSimulatorApp
             set
             {
                 airspeed_indicator_indicated_speed_kt = value;
-                NotifyPropretyChanged("Airspeed_indicator_indicated_speed_kt");
+                NotifyPropertyChanged("Airspeed_indicator_indicated_speed_kt");
             }
         }
         public double Gps_indicated_altitude_ft
@@ -129,7 +131,7 @@ namespace FlightSimulatorApp
             set
             {
                 gps_indicated_altitude_ft = value;
-                NotifyPropretyChanged("Gps_indicated_altitude_ft");
+                NotifyPropertyChanged("Gps_indicated_altitude_ft");
             }
         }
         public double Attitude_indicator_internal_roll_deg
@@ -141,7 +143,7 @@ namespace FlightSimulatorApp
             set
             {
                 attitude_indicator_internal_roll_deg = value;
-                NotifyPropretyChanged("Attitude_indicator_internal_roll_deg");
+                NotifyPropertyChanged("Attitude_indicator_internal_roll_deg");
             }
         }
         public double Attitude_indicator_internal_pitch_deg
@@ -153,7 +155,7 @@ namespace FlightSimulatorApp
             set
             {
                 attitude_indicator_internal_pitch_deg = value;
-                NotifyPropretyChanged("Attitude_indicator_internal_pitch_deg");
+                NotifyPropertyChanged("Attitude_indicator_internal_pitch_deg");
             }
         }
         public double Altimeter_indicated_altitude_ft
@@ -165,7 +167,7 @@ namespace FlightSimulatorApp
             set
             {
                 altimeter_indicated_altitude_ft = value;
-                NotifyPropretyChanged("Altimeter_indicated_altitude_ft");
+                NotifyPropertyChanged("Altimeter_indicated_altitude_ft");
             }
         }
 
@@ -177,9 +179,8 @@ namespace FlightSimulatorApp
             }
             set
             {
-                //check if we get only -1 0 1 and not between
                 ailrone = value;
-                NotifyPropretyChanged("Ailrone");
+                setProperty(value, 3);
             }
         }
         public double Elevator
@@ -191,7 +192,7 @@ namespace FlightSimulatorApp
             set
             {
                 elevator = value;
-                NotifyPropretyChanged("Elevator");
+                setProperty(value, 1);
             }
         }
         public double Rudder
@@ -214,7 +215,7 @@ namespace FlightSimulatorApp
                 {
                     rudder = value;
                 }
-                NotifyPropretyChanged("Rudder");
+                setProperty(value, 2);
             }
         }
         public double Throttle
@@ -237,34 +238,44 @@ namespace FlightSimulatorApp
                 {
                     throttle = value;
                 }
-                NotifyPropretyChanged("Throttle");
+                setProperty(value, 0);
             }
         }
 
-        public event PropertyChangedEventHandler PropretyChanged;
-        public void NotifyPropretyChanged(string propName)
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-            {
+            if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-            //PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+
         }
-        /* void moveAilrone()
-             {
-
-             }
-             void moveElevator()
-             {
-
-             }
-             void moveRudder()
-             {
-
-             }
-             void moveThrottle()
-             {
-
-             }*/
+        public void setProperty(double value, int setter)
+        {
+            string send = "";
+            switch (setter)
+            {
+                case 0:
+                    {
+                        send = "set /controls/engines/current-engine/throttle" + value;
+                        break;
+                    }
+                case 1:
+                    {
+                        send = "set /controls/flight/elevator" + value;
+                        break;
+                    }
+                case 2:
+                    {
+                        send = "set /controls/flight/rudder" + value;
+                        break;
+                    }
+                case 3:
+                    {
+                        send = "set /controls/flight/aileron" + value;
+                        break;
+                    }
+            }
+            telnetClient.Write(send);
+        }
     }
 }

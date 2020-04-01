@@ -3,18 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Controls="clr-namespace:FlightSimulatorApp.controls"
+        xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
         xmlns:local="clr-namespace:FlightSimulatorApp"
         mc:Ignorable="d"
-        Title="Flight-Gear" Height="800" Width="1100">
-    <Grid RenderTransformOrigin="0.49,0.502" Margin="10,10,0.333,-0.333">
-        <Viewbox>
-            <Controls:Joystick Margin="695,375,0,0">
-            
-            </Controls:Joystick>
+        Title="Flight-Gear" Height="600" Width="900">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Controls:controlsDisplay x:Name="controlsDisplay" Grid.RowSpan="2"/>
+        <Viewbox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Width="600" Margin="0,20,40,0" VerticalAlignment="Center">
+            <Controls:JoystickSliders x:Name="JoystickSliders"  Margin="0,50,50,0" VerticalAlignment="Center"/>
         </Viewbox>
-        <Controls:controlsDisplay>
-            
-        </Controls:controlsDisplay>
+        <Controls:Bing_Map x:Name="Bing_Map" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="2" Margin="10 0 -30 0"/>
     </Grid>
 </Window>

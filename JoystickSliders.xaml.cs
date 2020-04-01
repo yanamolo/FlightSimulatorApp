@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightSimulatorApp
+namespace FlightSimulatorApp.Controls
 {
-    using FlightSimulatorApp.Controls;
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for JoystickSliders.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class JoystickSliders : UserControl
     {
-        VMFlight vm;
-        public MainWindow()
+        public JoystickSliders()
         {
             InitializeComponent();
-            vm = new VMFlight(new FlightModel(new Client()));
-            this.DataContext = this.vm;
-            this.controlsDisplay.DataContext = vm;
-            this.Bing_Map.DataContext = vm;
-            vm.connect();
-            vm.start();
         }
     }
 }

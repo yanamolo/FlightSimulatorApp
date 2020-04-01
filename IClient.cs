@@ -12,5 +12,6 @@ namespace FlightSimulatorApp
         void Write(string command);
         string Read();
         void Disconnect();
+        void flush();
     }
 }

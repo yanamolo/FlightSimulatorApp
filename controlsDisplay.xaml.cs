@@ -12,28 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
-namespace FlightSimulatorApp.controls
+namespace FlightSimulatorApp.Controls
 {
     /// <summary>
     /// Interaction logic for controlsDisplay.xaml
     /// </summary>
     public partial class controlsDisplay : UserControl
     {
-        VMFlight vm;
         public controlsDisplay()
         {
             InitializeComponent();
-            vm = new VMFlight(new FlightModel(new Client()));
-            DataContext = vm;
-/*            Binding bind_Indicated_heading_deg = new Binding("VM_Indicated_heading_deg");
-            bind_Indicated_heading_deg.Mode = BindingMode.OneWay;
-            bind_Indicated_heading_deg.Source = vm;
-            indicated_heading.SetBinding(TextBox.TextProperty, bind_Indicated_heading_deg);
-            Binding myBinding = new Binding("VM_Gps_indicated_vertical_speed");
-            myBinding.Mode = BindingMode.OneWay;
-            myBinding.Source = vm;
-            gps_vertical.SetBinding(TextBox.TextProperty, myBinding);*/
         }
     }
 }
