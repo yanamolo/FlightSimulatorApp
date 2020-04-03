@@ -23,11 +23,35 @@ namespace FlightSimulatorApp.Controls
     {
         private double x;
         private double y;
+        private Point elipsePoint;
         public Joystick()
         {
             InitializeComponent();
         }
-        private void CenterKnob_Completed(object sender, EventArgs e) {
+        public double NormalX
+        {
+            get { return (double)GetValue(NormalXProperty); }
+            set { SetValue(NormalXProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NormalX.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NormalXProperty =
+            DependencyProperty.Register("NormalX", typeof(double), typeof(Joystick), new PropertyMetadata((double)0));
+
+
+        public double NormalY
+        {
+            get { return (double)GetValue(NormalYProperty); }
+            set { SetValue(NormalYProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NormalY.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NormalYProperty =
+            DependencyProperty.Register("NormalY", typeof(double), typeof(Joystick), new PropertyMetadata((double)0));
+
+
+        private void CenterKnob_Completed(object sender, EventArgs e)
+        {
             Storyboard sb = (Storyboard)this.FindResource(this);
         }
 
@@ -44,12 +68,22 @@ namespace FlightSimulatorApp.Controls
             {
                 x1 = e.GetPosition(this).X - x;
                 y1 = e.GetPosition(this).Y - y;
+                this.elipsePoint = e.GetPosition(this.border);
                 if (length(x1, y1, 0, 0) < Base.Width / 3)
                 {
                     knobPosition.X = x1;
                     knobPosition.Y = y1;
+                    this.joystickValueTranslation();
                 }
             }
+        }
+        private void joystickValueTranslation()
+        {
+            double borderRadius = this.border.Width / 2;
+            double normalX = (this.knobPosition.X - this.elipsePoint.X) / borderRadius;
+            double normalY = (this.knobPosition.Y - this.elipsePoint.Y) / borderRadius;
+            this.NormalX = normalX;
+            this.NormalY = normalY;
         }
 
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)

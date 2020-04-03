@@ -32,7 +32,7 @@
         <Slider x:Name="rudder" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Margin="0,30,70,0" HorizontalAlignment="Center" Maximum="1" Minimum="-1" SmallChange="0.01" LargeChange="0.1" Orientation="Horizontal" TickPlacement="BottomRight" TickFrequency="0.1" 
                 MaxWidth="350" MinWidth="300" MinHeight="20" IsMoveToPointEnabled="True" Value="{Binding VM_Rudder}"/>
         <TextBox Grid.Row="5" Height="30" Width="40" VerticalAlignment="Center" Margin="100 0 0 0" Text="{Binding ElementName=rudder, Path=Value, UpdateSourceTrigger=PropertyChanged}" FontSize="15" Grid.Column="2" />
-        <Controls:Joystick Grid.Column="1" Grid.RowSpan="2" Margin="0,20,0,0">
-        </Controls:Joystick>
+        <Controls:Joystick Grid.Column="1" Grid.RowSpan="2" Margin="0,20,0,0" NormalX="{Binding VM_Ailrone, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"  NormalY="{Binding VM_Elevator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+
     </Grid>
 </UserControl>
