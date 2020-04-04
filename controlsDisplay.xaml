@@ -45,5 +45,7 @@
         <TextBox x:Name="attitude_pitch" Grid.Row="8" Grid.Column="2" Text="{Binding VM_Attitude_indicator_internal_pitch_deg, Mode=OneWay}"></TextBox>
         <TextBlock FontSize="20" Grid.Column="1" Grid.Row="9">altimeter_indicated-altitude-ft</TextBlock>
         <TextBox x:Name="altimeter" Grid.Row="9" Grid.Column="2" Text="{Binding VM_Altimeter_indicated_altitude_ft, Mode=OneWay}"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="10">location</TextBlock>
+        <TextBox x:Name="Location" Grid.Row="10" Grid.Column="2" Text="{Binding VM_Coardinates, Mode=OneWay}"></TextBox>
     </Grid>
 </UserControl>

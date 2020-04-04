@@ -9,6 +9,10 @@ namespace FlightSimulatorApp
         IClient telnetClient;
         volatile Boolean stop;
         //Propreties
+        private string latitude_deg;
+        private string longitude_deg;
+        private string coardinates;
+
         private double ailrone;
         private double elevator;
         private double rudder;
@@ -47,6 +51,14 @@ namespace FlightSimulatorApp
                 {
                     try
                     {
+                        telnetClient.Write("get /position/latitude-deg\r\n");
+                        latitude_deg = telnetClient.Read();
+                        telnetClient.Write("get /position/longitude-deg\r\n");
+                        longitude_deg = telnetClient.Read();
+                        latitude_deg = latitude_deg.Substring(0, latitude_deg.Length - 1);
+                        longitude_deg = longitude_deg.Substring(0, longitude_deg.Length - 1);
+                        Coardinates = latitude_deg + "," + longitude_deg;
+
                         telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
                         Indicated_heading_deg = Double.Parse(telnetClient.Read());
                         telnetClient.Write("get /instrumentation/gps/indicated-vertical-speed\r\n");
@@ -73,7 +85,18 @@ namespace FlightSimulatorApp
                 }
             }).Start();
         }
-
+        public string Coardinates
+        {
+            get
+            {
+                return coardinates;
+            }
+            set
+            {
+                coardinates = value;
+                NotifyPropertyChanged("Coardinates");
+            }
+        }
         public double Indicated_heading_deg
         {
             get

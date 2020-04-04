@@ -10,7 +10,8 @@
     <Grid>
         <m:Map x:Name="myMap" 
                CredentialsProvider="zoYbeW7WjhdV69xyYo99~Kke2jQPcAW7S4k_PxqJLRw~AvoxZuPGUtRx9z0V234eYfbc6e9WPreIAoFWyRbMCd7GTUcVv85nY3gyMSJowBgI" Mode="AerialWithLabels" >
-            <m:Pushpin Location="32.002644, 34.888781"/>
+
+            <m:Pushpin Location="{Binding VM_Coardinates, Mode=OneWay}"/>
             <TextBlock x:Name="CurrentPosition" FontSize="20" Grid.Column="1" Grid.Row="1" Foreground="WhiteSmoke" ></TextBlock>
         </m:Map>
     </Grid>

@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
         xmlns:local="clr-namespace:FlightSimulatorApp"
         mc:Ignorable="d"
-        Title="Flight-Gear" Height="600" Width="900">
+        Title="Flight-Gear" Height="800" Width="1200">
     <Grid>
 
         <Grid.ColumnDefinitions>

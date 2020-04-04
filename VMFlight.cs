@@ -29,6 +29,15 @@ namespace FlightSimulatorApp
 
         }
         //propreties
+       
+        public string VM_Coardinates
+        {
+            get
+            {
+                return model.Coardinates;
+            }
+        }
+
         public double VM_Indicated_heading_deg
         {
             get
