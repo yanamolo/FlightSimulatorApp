@@ -15,20 +15,24 @@ using System.Windows.Shapes;
 
 namespace FlightSimulatorApp
 {
-    using FlightSimulatorApp.Controls;
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FlightView.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class FlightView : Page
     {
-        Home home;
-        
-        public MainWindow()
+        VMFlight vm;
+        public FlightView()
         {
             InitializeComponent();
-            home = new Home();
+        }
 
-            Navigate(home);
+        public void set_VM(VMFlight viewModel)
+        {
+            vm = viewModel;
+            DataContext = vm;
+           /* this.controlsDisplay.DataContext = vm;
+            this.Bing_Map.DataContext = vm;
+            this.JoystickSliders.DataContext = vm;*/
         }
     }
 }

@@ -4,15 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FlightSimulatorApp.Controls"
-      mc:Ignorable="d" 
-      d:DesignHeight="330" d:DesignWidth="400">
+      mc:Ignorable="d" d:DesignWidth="400" Height="421.2">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -26,26 +25,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <TextBlock FontSize="30" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Segoe UI Black" HorizontalAlignment="Center" Background="Coral" Margin="15">Control Pannel</TextBlock>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">indicated-heading-deg</TextBlock>
-        <TextBox x:Name="indicated_heading" Grid.Row="2" Grid.Column="2" Width="100" Text="{Binding Path=VM_Indicated_heading_deg, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="3" >gps_indicated-vertical-speed</TextBlock>
-        <TextBox x:Name="gps_vertical" Grid.Row="3" Grid.Column="2" Text="{Binding VM_Gps_indicated_vertical_speed, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="4">gps_indicated-ground-speed-kt</TextBlock>
-        <TextBox x:Name="gps_ground" Grid.Row="4" Grid.Column="2" Text="{Binding VM_Gps_indicated_ground_speed_kt, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="5">airspeed-indicator</TextBlock>
-        <TextBox x:Name="airspeed" Grid.Row="5" Grid.Column="2" Text="{Binding VM_Airspeed_indicator_indicated_speed_kt, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="6">gps_indicated-altitude-ft</TextBlock>
-        <TextBox x:Name="gps_altitude" Grid.Row="6" Grid.Column="2" Text="{Binding VM_Gps_indicated_altitude_ft, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="7">attitude-indicator_internal-roll</TextBlock>
-        <TextBox x:Name="attitude_roll" Grid.Row="7" Grid.Column="2" Text="{Binding VM_Attitude_indicator_internal_roll_deg, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="8">attitude-indicator_internal-pitch</TextBlock>
-        <TextBox x:Name="attitude_pitch" Grid.Row="8" Grid.Column="2" Text="{Binding VM_Attitude_indicator_internal_pitch_deg, Mode=OneWay}"></TextBox>
-        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="9">altimeter_indicated-altitude-ft</TextBlock>
-        <TextBox x:Name="altimeter" Grid.Row="9" Grid.Column="2" Text="{Binding VM_Altimeter_indicated_altitude_ft, Mode=OneWay}"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">Heading deg</TextBlock>
+        <TextBox x:Name="indicated_heading" Grid.Row="1" Grid.Column="1" Text="{Binding Path=VM_Indicated_heading_deg, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="4" Margin="195,70,11,26.2" Grid.RowSpan="3"/>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="3" >Vertical speed</TextBlock>
+        <TextBox x:Name="gps_vertical" Grid.Row="3" Grid.Column="1" Text="{Binding VM_Gps_indicated_vertical_speed, Mode=OneWay}" Grid.ColumnSpan="4" Height="26" Margin="195,0.2,11,0" VerticalAlignment="Top"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="4">Ground speed kt</TextBlock>
+        <TextBox x:Name="gps_ground" Grid.Row="3" Grid.Column="1" Text="{Binding VM_Gps_indicated_ground_speed_kt, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,26.2,11,26" Grid.RowSpan="3"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="5">Airspeed</TextBlock>
+        <TextBox x:Name="airspeed" Grid.Row="5" Grid.Column="1" Text="{Binding VM_Airspeed_indicator_indicated_speed_kt, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,0.4,11,0"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="6">Altitude ft</TextBlock>
+        <TextBox x:Name="gps_altitude" Grid.Row="6" Grid.Column="1" Text="{Binding VM_Gps_indicated_altitude_ft, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,0,11,0.4"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="7">Roll</TextBlock>
+        <TextBox x:Name="attitude_roll" Grid.Row="6" Grid.Column="1" Text="{Binding VM_Attitude_indicator_internal_roll_deg, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,26,11,26.2" Grid.RowSpan="3"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="8">Pitch</TextBlock>
+        <TextBox x:Name="attitude_pitch" Grid.Row="8" Grid.Column="1" Text="{Binding VM_Attitude_indicator_internal_pitch_deg, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,0.2,11,0.2"></TextBox>
+        <TextBlock FontSize="20" Grid.Column="1" Grid.Row="9">Altitude ft</TextBlock>
+        <TextBox x:Name="altimeter" Grid.Row="8" Grid.Column="1" Text="{Binding VM_Altimeter_indicated_altitude_ft, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,26.2,11,28.4" Grid.RowSpan="3"></TextBox>
         <TextBlock FontSize="20" Grid.Column="1" Grid.Row="10">location</TextBlock>
-        <TextBox x:Name="Location" Grid.Row="10" Grid.Column="2" Text="{Binding VM_Coardinates, Mode=OneWay}"></TextBox>
+        <TextBox x:Name="Location" Grid.Row="10" Grid.Column="1" Text="{Binding VM_Coardinates, Mode=OneWay}" Grid.ColumnSpan="4" Margin="195,0.4,11,0.4"></TextBox>
     </Grid>
 </UserControl>

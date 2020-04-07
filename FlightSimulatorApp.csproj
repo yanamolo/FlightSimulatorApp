@@ -63,6 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="Controls\Bing_Map.xaml.cs" />
     <Compile Include="Controls\controlsDisplay.xaml.cs" />
+    <Compile Include="FlightView.xaml.cs">
+      <DependentUpon>FlightView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IViewModel.cs" />
     <Compile Include="Controls\Joystick.xaml.cs" />
     <Compile Include="Controls\JoystickSliders.xaml.cs" />
@@ -78,6 +81,10 @@
     <Page Include="Controls\JoystickSliders.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FlightView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +139,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\plane.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\homeBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="homeBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

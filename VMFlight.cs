@@ -7,11 +7,9 @@ using System.ComponentModel;
 
 namespace FlightSimulatorApp
 {
-    class VMFlight : INotifyPropertyChanged
+    public class VMFlight : INotifyPropertyChanged
     {
-        private int port = 5402;
-        private string ip = "127.0.0.1";
-        private FlightModel model;
+        FlightModel model;
         public VMFlight(FlightModel m)
         {
             this.model = m;
@@ -29,7 +27,7 @@ namespace FlightSimulatorApp
 
         }
         //propreties
-       
+
         public string VM_Coardinates
         {
             get
@@ -139,7 +137,7 @@ namespace FlightSimulatorApp
             }
         }
 
-        public void connect()
+        public void connect(string ip, int port)
         {
             model.connect(ip, port);
         }

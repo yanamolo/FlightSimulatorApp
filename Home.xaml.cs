@@ -20,14 +20,36 @@ namespace FlightSimulatorApp
     /// </summary>
     public partial class Home : Page
     {
+        FlightModel model;
+        VMFlight vm;
+        FlightView view;
         public Home()
         {
-            InitializeComponent();
+           InitializeComponent();
+           model = new FlightModel(new Client());
+           vm = new VMFlight(model);
+
         }
 
-        private void Joystick_Loaded(object sender, RoutedEventArgs e)
+       /* private void Joystick_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }*/
+
+        private void login_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String.IsNullOrWhiteSpace(IP.Text)) || (String.IsNullOrWhiteSpace(Port.Text)))
+            {
+
+            } else
+            {
+                vm.connect(IP.Text, Int32.Parse(Port.Text));
+                vm.start();
+                view = new FlightView();
+                view.set_VM(vm);
+                this.NavigationService.Navigate(view);
+            }
         }
+
     }
 }

@@ -28,7 +28,7 @@ namespace FlightSimulatorApp.Controls
             myMap.ViewChangeOnFrame += new EventHandler<MapEventArgs>(myMap_ViewChangeOnFrame);
         }
 
-        void myMap_ViewChangeOnFrame(object sender, MapEventArgs e)
+        public void myMap_ViewChangeOnFrame(object sender, MapEventArgs e)
         {
             //Gets the map that raised this event
             Map map = (Map)sender;

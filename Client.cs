@@ -10,7 +10,7 @@ namespace FlightSimulatorApp
     using System.Net.NetworkInformation;
     using System.Net.Sockets;
 
-    class Client : IClient
+    public class Client : IClient
     {
         /// <summary>The size</summary>
         private const short Size = 512;
