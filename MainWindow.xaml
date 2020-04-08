@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
         xmlns:local="clr-namespace:FlightSimulatorApp"
-        Title="Flight-Gear" Height="600" Width="900">
+        Title="Flight Simulator" Height="600" Width="900" Icon="icon.png">
 </NavigationWindow>

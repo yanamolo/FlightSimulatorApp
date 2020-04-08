@@ -30,9 +30,22 @@ namespace FlightSimulatorApp
         {
             vm = viewModel;
             DataContext = vm;
-           /* this.controlsDisplay.DataContext = vm;
+            this.controlsDisplay.DataContext = vm;
             this.Bing_Map.DataContext = vm;
-            this.JoystickSliders.DataContext = vm;*/
+            this.JoystickSliders.DataContext = vm;
+        }
+
+        private void log_out_Click(object sender, RoutedEventArgs e)
+         {
+            vm.disconnect();
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("No entries in back navigation history.");
+            }
         }
     }
 }

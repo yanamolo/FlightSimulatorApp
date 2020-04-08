@@ -51,5 +51,13 @@ namespace FlightSimulatorApp
             }
         }
 
+        private void default_Click(object sender, RoutedEventArgs e)
+        {
+            vm.connect("127.0.0.1", 5402);
+            vm.start();
+            view = new FlightView();
+            view.set_VM(vm);
+            this.NavigationService.Navigate(view);
+        }
     }
 }

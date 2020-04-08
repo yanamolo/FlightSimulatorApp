@@ -149,5 +149,14 @@
   <ItemGroup>
     <Resource Include="homeBackground.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="viewBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\backgroundPanel.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

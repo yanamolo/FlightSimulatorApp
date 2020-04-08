@@ -10,44 +10,50 @@
       Title="Home"
 Height="{Binding SystemParameters.PrimaryScreenHeight}"
       Width="{Binding SystemParameters.PrimaryScreenWidth}">
-    <Canvas RenderTransformOrigin="0.49, 0.502">
+    <Grid>
+        <Canvas RenderTransformOrigin="0.49, 0.502">
 
-        <TextBlock FontSize="100" HorizontalAlignment="Center" Margin="38,10,43.667,442.333" Width="808" RenderTransformOrigin="0.5,0.5"
+            <TextBlock FontSize="100" HorizontalAlignment="Center" Margin="38,10,43.667,442.333" Width="808" RenderTransformOrigin="0.5,0.5"
                    FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68" Grid.ColumnSpan="2">
             Flight Simulator</TextBlock>
-        <Rectangle Fill="#FFCDCDCD" Opacity="0.5" RadiusX="45" RadiusY="45" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Height="309" Canvas.Left="35" Canvas.Top="194" Width="400">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.263"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <TextBlock FontSize="55" HorizontalAlignment="Center" Width="91" RenderTransformOrigin="0.5,0.5"
-                   FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68" Canvas.Left="81" Canvas.Top="208">IP:</TextBlock>
-        <TextBlock FontSize="55" HorizontalAlignment="Center" Margin="43,292,205.127,228.333" Width="159" RenderTransformOrigin="0.5,0.5"
-                   FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68">Port:</TextBlock>
-        <Border Background="#FF92D4F7" Margin="122,386,69.127,108.333" Opacity="0.7" CornerRadius="20">
-            <Button x:Name="login" Content="LOG IN" Foreground="Black" FontSize="55" FontFamily="Segoe UI Black"
+            <Rectangle Fill="#FFCDCDCD" Opacity="0.5" RadiusX="45" RadiusY="45" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Height="403" Canvas.Left="35" Canvas.Top="171" Width="376">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.263"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock FontSize="55" HorizontalAlignment="Center" Width="91" RenderTransformOrigin="0.644,-0.134"
+                   FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68" Canvas.Left="85" Canvas.Top="174">IP:</TextBlock>
+            <TextBlock FontSize="55" HorizontalAlignment="Center" Width="159" RenderTransformOrigin="0.5,0.5"
+                   FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68" Canvas.Left="46" Canvas.Top="252">Port:</TextBlock>
+            <Border Background="#FF92D4F7" Margin="122,342,69.127,108.333" Opacity="0.7" CornerRadius="20">
+                <Button x:Name="login" Content="LOG IN" Foreground="Black" FontSize="55" FontFamily="Segoe UI Black"
                     FontWeight="ExtraBold" Margin="0,-1,0.2,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="login_Click" Height="101" VerticalAlignment="Top" Width="216"/>
-        </Border>
-        <Border Background="White" CornerRadius="15"
-            RenderTransformOrigin="0.508,0.068" Height="60" Canvas.Left="210" Canvas.Top="221" Width="181">
-            <TextBox x:Name="IP" Margin="10,-1,9.8,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" VerticalAlignment="Center" FontSize="35" FontFamily="Segoe UI" SelectionBrush="{x:Null}"/>
-        </Border>
-        <Border Background="White" CornerRadius="15"
-            RenderTransformOrigin="0.508,0.068" Height="60" Canvas.Left="210" Canvas.Top="304" Width="181" >
-            <TextBox x:Name="Port" Margin="9,2,9.8,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" VerticalAlignment="Center" FontSize="35" FontFamily="Segoe UI" SelectionBrush="{x:Null}" />
-        </Border>
-        <Label Content="Yana Molodetsky" FontSize="40" FontWeight="Bold" Foreground="White"
+            </Border>
+            <Border Background="#FF92D4F7" Opacity="0.7" CornerRadius="20" Canvas.Left="122" Canvas.Top="459" Width="216">
+                <Button x:Name="DEFAULT" Content="LOG DEFAULT&#xA;     SERVER" Foreground="Black" FontSize="29" FontFamily="Segoe UI Black"
+                    FontWeight="ExtraBold" Margin="0,-1,6,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="default_Click" Height="101" VerticalAlignment="Center" HorizontalAlignment="Right" Width="203"/>
+            </Border>
+            <Border Background="White" CornerRadius="15"
+            RenderTransformOrigin="0.508,0.068" Height="60" Canvas.Left="210" Canvas.Top="187" Width="181">
+                <TextBox x:Name="IP" Margin="10,-1,9.8,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" VerticalAlignment="Center" FontSize="35" FontFamily="Segoe UI" SelectionBrush="{x:Null}"/>
+            </Border>
+            <Border Background="White" CornerRadius="15"
+            RenderTransformOrigin="0.508,0.068" Height="60" Canvas.Left="210" Canvas.Top="265" Width="181" >
+                <TextBox x:Name="Port" Margin="9,2,9.8,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" VerticalAlignment="Center" FontSize="35" FontFamily="Segoe UI" SelectionBrush="{x:Null}" />
+            </Border>
+            <Label Content="Yana Molodetsky" FontSize="40" FontWeight="Bold" Foreground="White"
                HorizontalAlignment="Center" Width="334" RenderTransformOrigin="0.327,-4.151" Grid.Column="1" Canvas.Left="566" Canvas.Top="526"/>
-        <Label Content="Orit Fine" FontSize="40" FontWeight="Bold" Foreground="White"
+            <Label Content="Orit Fine" FontSize="40" FontWeight="Bold" Foreground="White"
                HorizontalAlignment="Center" Width="175" Grid.Column="1" Canvas.Left="715" Canvas.Top="475" RenderTransformOrigin="0,1" ClipToBounds="True"/>
 
-        <Canvas.Background>
-            <ImageBrush ImageSource="homeBackground.png" TileMode="Tile"/>
-        </Canvas.Background>
-    </Canvas>
+            <Canvas.Background>
+                <ImageBrush ImageSource="homeBackground.png" TileMode="Tile"/>
+            </Canvas.Background>
+        </Canvas>
+    </Grid>
 </Page>

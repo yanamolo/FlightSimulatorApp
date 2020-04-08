@@ -24,5 +24,10 @@ namespace FlightSimulatorApp.Controls
         {
             InitializeComponent();
         }
+
+        private void throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
