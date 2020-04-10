@@ -26,7 +26,7 @@ namespace FlightSimulatorApp
         public Home()
         {
            InitializeComponent();
-           model = new FlightModel(new Client());
+           model = new FlightModel();
            vm = new VMFlight(model);
 
         }
@@ -43,6 +43,7 @@ namespace FlightSimulatorApp
 
             } else
             {
+                model.setClient(new Client());
                 vm.connect(IP.Text, Int32.Parse(Port.Text));
                 vm.start();
                 view = new FlightView();
@@ -53,6 +54,7 @@ namespace FlightSimulatorApp
 
         private void default_Click(object sender, RoutedEventArgs e)
         {
+            model.setClient(new Client());
             vm.connect("127.0.0.1", 5402);
             vm.start();
             view = new FlightView();

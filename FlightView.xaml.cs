@@ -34,6 +34,19 @@ namespace FlightSimulatorApp
             this.Bing_Map.DataContext = vm;
             this.JoystickSliders.DataContext = vm;
         }
+        private void locationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (location_of_pushpin.Visibility == Visibility.Visible)
+            {
+                location_of_pushpin.Visibility = Visibility.Hidden;
+                locationButton.Content =  "   SHOW\nLOCATION";
+
+            } else if (location_of_pushpin.Visibility == Visibility.Hidden)
+            {
+                location_of_pushpin.Visibility = Visibility.Visible;
+                locationButton.Content = "    HIDE\nLOCATION";
+            }
+        }
 
         private void log_out_Click(object sender, RoutedEventArgs e)
          {
