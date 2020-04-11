@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
@@ -14,9 +14,12 @@ namespace FlightSimulatorApp
         //Propreties
         private string errors;
 
-        private string latitude_deg;
-        private string longitude_deg;
+        private double latitude_deg;
+        private double longitude_deg;
+        private string latitude;
+        private string longitude;
         private string coardinates;
+
 
         private double ailrone;
         private double elevator;
@@ -78,12 +81,13 @@ namespace FlightSimulatorApp
                         }
 
                         telnetClient.Write("get /position/latitude-deg\r\n");
-                        latitude_deg = telnetClient.Read();
+                        latitude = telnetClient.Read();
+                        Latitude_deg = Double.Parse(latitude);
                         telnetClient.Write("get /position/longitude-deg\r\n");
-                        longitude_deg = telnetClient.Read();
-                        latitude_deg = latitude_deg.Substring(0, latitude_deg.Length - 1);
-                        longitude_deg = longitude_deg.Substring(0, longitude_deg.Length - 1);
-                        Coardinates = latitude_deg + "," + longitude_deg;
+                        longitude = telnetClient.Read();
+                        Longitude_deg = Double.Parse(longitude);
+                        Coardinates = latitude + "," + longitude;
+
 
                         telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
                         Indicated_heading_deg = Double.Parse(telnetClient.Read());
@@ -302,6 +306,55 @@ namespace FlightSimulatorApp
                 setProperty(value, 0);
             }
         }
+        public double Latitude_deg
+        {
+            get
+            {
+                return latitude_deg;
+            }
+            set
+            {
+                if ((value <= 90) && (value >= -90))
+                {
+                    latitude_deg = value;
+                    latitude = latitude.Substring(0, latitude.Length - 1);
+                    NotifyPropertyChanged("Latitude_deg");
+                }
+                else if (latitude_deg == 0)
+                {
+
+                }
+                else
+                {
+                    latitude = latitude_deg.ToString();
+                }
+            }
+        }
+        public double Longitude_deg
+        {
+            get
+            {
+                return longitude_deg;
+            }
+            set
+            {
+                if ((value <= 180) && (value >= -180))
+                {
+                    longitude_deg = value;
+                    longitude = longitude.Substring(0, longitude.Length - 1);
+                    NotifyPropertyChanged("Longitude_deg");
+                }
+                else if (longitude_deg == 0)
+                {
+
+                }
+                else
+                {
+                    longitude = longitude_deg.ToString();
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)

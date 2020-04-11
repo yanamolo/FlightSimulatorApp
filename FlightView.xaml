@@ -1,10 +1,10 @@
-﻿<Page x:Class="FlightSimulatorApp.FlightView"
+<Page x:Class="FlightSimulatorApp.FlightView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
-      xmlns:local="clr-namespace:FlightSimulatorApp"
+      xmlns:local="clr-namespace:FlightSimulator"
       mc:Ignorable="d" 
       d:DesignHeight="514" d:DesignWidth="872" Title="FlightSimulator">
     <Grid>
@@ -16,15 +16,26 @@
                 <Controls:controlsDisplay x:Name="controlsDisplay" Height="340" Width="410" Background="White"/>
             </Viewbox>
             <Viewbox Width="815" Height="775" VerticalAlignment="Center" Canvas.Left="-180" Canvas.Top="-161">
-                <Controls:Bing_Map x:Name="Bing_Map" Margin="44,168,-44.4,102.2" Width="547" Height="510"/>
+                <Controls:Bing_Map x:Name="Bing_Map" Margin="44,168,-44.4,102.2" Width="533" Height="523"/>
             </Viewbox>
-            <Viewbox Width="286" VerticalAlignment="Center" Canvas.Left="539" Canvas.Top="216" Height="288">
+            <Viewbox Width="309" VerticalAlignment="Center" Canvas.Left="525" Canvas.Top="206" Height="308">
                 <Controls:JoystickSliders x:Name="JoystickSliders"  Margin="0,50,50,0" VerticalAlignment="Center" Width="574" Height="573"/>
             </Viewbox>
-            <TextBlock Text="{Binding VM_Errors}" Canvas.Bottom="70" Canvas.Left="600" Width="200" FontSize="30" Foreground="Red" />
-            <Border Background="#FF92D4F7" Margin="772,444,69.127,108.333"  CornerRadius="15">
+            <Border Background="#FF92D4F7" Margin="772,454,69.127,108.333"  CornerRadius="15">
                 <Button x:Name="logout" Content="LOG&#xD;&#xA;OUT" Foreground="Black" FontSize="20" FontFamily="Segoe UI Black"
-                    FontWeight="ExtraBold" Margin="0,-1,0.2,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="log_out_Click" Height="56" VerticalAlignment="Top" Width="71"/>
+                    FontWeight="ExtraBold" Margin="0,-1,0.2,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="log_out_Click" Height="57" VerticalAlignment="Top" Width="81"/>
+            </Border>
+            <Border Background="#FF92D4F7" Margin="772,390,69.127,108.333"  CornerRadius="15">
+                <Button x:Name="locationButton" Content="   SHOW&#xD;&#xA;LOCATION" Foreground="Black" FontSize="14" FontFamily="Segoe UI Black"
+                    FontWeight="ExtraBold" Margin="0,-1,0.2,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="locationButton_Click" Height="57" VerticalAlignment="Top" Width="81"/>
+            </Border>
+            <Border Background="#FF323748" x:Name="location_of_pushpin" CornerRadius="15" Height="51" Canvas.Left="13" Canvas.Top="463" Width="303" Visibility="Hidden">
+                <TextBlock  Foreground="white" FontSize="18" Margin="10,0,-16.2,0" Background="{x:Null}" Height="51" VerticalAlignment="Top" FontWeight="Bold">
+                <Run Text="Latitude: "></Run>
+                <Run Text="{Binding VM_Latitude_deg, Mode=OneWay}"></Run>
+                <Run Text="&#xD;&#xA;Longitude: "></Run>
+                <Run Text="{Binding VM_Longitude_deg, Mode=OneWay}"></Run>
+                </TextBlock>
             </Border>
         </Canvas>
     </Grid>

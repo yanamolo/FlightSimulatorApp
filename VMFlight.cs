@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +32,20 @@ namespace FlightSimulatorApp
             get
             {
                 return model.Errors;
+            }
+        }
+        public double VM_Latitude_deg
+        {
+            get
+            {
+                return model.Latitude_deg;
+            }
+        }
+        public double VM_Longitude_deg
+        {
+            get
+            {
+                return model.Longitude_deg;
             }
         }
         public string VM_Coardinates

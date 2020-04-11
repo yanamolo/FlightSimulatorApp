@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -26,16 +26,16 @@ namespace FlightSimulatorApp
         FlightView view;
         public Home()
         {
-           InitializeComponent();
-           model = new FlightModel();
-           vm = new VMFlight(model);
+            InitializeComponent();
+            model = new FlightModel();
+            vm = new VMFlight(model);
 
         }
 
-       /* private void Joystick_Loaded(object sender, RoutedEventArgs e)
-        {
+        /* private void Joystick_Loaded(object sender, RoutedEventArgs e)
+         {
 
-        }*/
+         }*/
 
         private void login_Click(object sender, RoutedEventArgs e)
         {

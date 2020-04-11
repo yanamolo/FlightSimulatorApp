@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -42,7 +42,6 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,9 +63,8 @@
     </ApplicationDefinition>
     <Compile Include="Controls\Bing_Map.xaml.cs" />
     <Compile Include="Controls\controlsDisplay.xaml.cs" />
-    <Compile Include="FlightView.xaml.cs" />
-    <Compile Include="Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="FlightView.xaml.cs">
+      <DependentUpon>FlightView.xaml</DependentUpon>
     </Compile>
     <Compile Include="IViewModel.cs" />
     <Compile Include="Controls\Joystick.xaml.cs" />
@@ -84,15 +82,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Joystick.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="FlightView.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Joystick.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -105,6 +103,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Client.cs" />
+    <Compile Include="Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IClient.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -143,16 +144,25 @@
     <Resource Include="Controls\plane.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Controls\homeBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="homeBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Controls\backgroundPanel.png" />
+    <Resource Include="icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="viewBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.png" />
+    <Resource Include="Controls\backgroundPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\baloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\baloon3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
