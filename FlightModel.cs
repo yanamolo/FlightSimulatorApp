@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 
@@ -6,14 +7,19 @@ namespace FlightSimulatorApp
 {
     public class FlightModel : IModel
     {
+        private readonly object balancelock = new object();
+        List<string> msg_to_send;
         IClient telnetClient;
-        volatile Boolean stop;
+        volatile bool stop;
         //Propreties
+        private string errors;
+
         private double latitude_deg;
         private double longitude_deg;
         private string latitude;
         private string longitude;
         private string coardinates;
+
 
         private double ailrone;
         private double elevator;
@@ -29,13 +35,16 @@ namespace FlightSimulatorApp
         private double attitude_indicator_internal_pitch_deg;
         private double altimeter_indicated_altitude_ft;
         public FlightModel()
-        { 
-
+        {
+            stop = false;
+            msg_to_send = new List<string>();
         }
+
         public void setClient(IClient telnetClient)
         {
             this.telnetClient = telnetClient;
         }
+
 
         public void connect(string ip, int port)
         {
@@ -57,6 +66,20 @@ namespace FlightSimulatorApp
                 {
                     try
                     {
+                        lock (balancelock)
+                        {
+                            if (this.msg_to_send.Count != 0)
+                            {
+                                int i = 0;
+                                do
+                                {
+                                    this.telnetClient.Write(msg_to_send[i]);
+                                    string temp = this.telnetClient.Read();
+                                    msg_to_send.Remove(msg_to_send[i]);
+                                } while (this.msg_to_send.Count != 0);
+                            }
+                        }
+
                         telnetClient.Write("get /position/latitude-deg\r\n");
                         latitude = telnetClient.Read();
                         Latitude_deg = Double.Parse(latitude);
@@ -64,6 +87,7 @@ namespace FlightSimulatorApp
                         longitude = telnetClient.Read();
                         Longitude_deg = Double.Parse(longitude);
                         Coardinates = latitude + "," + longitude;
+
 
                         telnetClient.Write("get /instrumentation/heading-indicator/indicated-heading-deg\r\n");
                         Indicated_heading_deg = Double.Parse(telnetClient.Read());
@@ -83,58 +107,24 @@ namespace FlightSimulatorApp
                         Airspeed_indicator_indicated_speed_kt = Double.Parse(telnetClient.Read());
                         Thread.Sleep(250);// read the data in 4Hz 
                     }
-                    catch (Exception e)
+                    catch
                     {
-                        this.telnetClient.flush();
-                        continue;
+                        this.disconnect();
+                        Errors = "Server Disconnected";
                     }
                 }
             }).Start();
         }
-        public double Latitude_deg
+        public string Errors
         {
             get
             {
-                return latitude_deg;
+                return this.errors;
             }
             set
             {
-                if ((value <= 90) && (value >= -90))
-                {
-                    latitude_deg = value;
-                    latitude = latitude.Substring(0, latitude.Length - 1);
-                    NotifyPropertyChanged("Latitude_deg");
-                } else if (latitude_deg == 0 )
-                {
-
-                } else
-                {
-                    latitude = latitude_deg.ToString();
-                }
-            }
-        }
-        public double Longitude_deg
-        {
-            get
-            {
-                return longitude_deg;
-            }
-            set
-            {
-                if ((value <= 180) && (value >= -180))
-                {
-                    longitude_deg = value;
-                    longitude = longitude.Substring(0, longitude.Length - 1);
-                    NotifyPropertyChanged("Longitude_deg");
-                }
-                else if (longitude_deg == 0)
-                {
-
-                }
-                else
-                {
-                    longitude = longitude_deg.ToString();
-                }
+                this.errors = value;
+                NotifyPropertyChanged("Errors");
             }
         }
         public string Coardinates
@@ -316,6 +306,55 @@ namespace FlightSimulatorApp
                 setProperty(value, 0);
             }
         }
+        public double Latitude_deg
+        {
+            get
+            {
+                return latitude_deg;
+            }
+            set
+            {
+                if ((value <= 90) && (value >= -90))
+                {
+                    latitude_deg = value;
+                    latitude = latitude.Substring(0, latitude.Length - 1);
+                    NotifyPropertyChanged("Latitude_deg");
+                }
+                else if (latitude_deg == 0)
+                {
+
+                }
+                else
+                {
+                    latitude = latitude_deg.ToString();
+                }
+            }
+        }
+        public double Longitude_deg
+        {
+            get
+            {
+                return longitude_deg;
+            }
+            set
+            {
+                if ((value <= 180) && (value >= -180))
+                {
+                    longitude_deg = value;
+                    longitude = longitude.Substring(0, longitude.Length - 1);
+                    NotifyPropertyChanged("Longitude_deg");
+                }
+                else if (longitude_deg == 0)
+                {
+
+                }
+                else
+                {
+                    longitude = longitude_deg.ToString();
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
@@ -331,26 +370,29 @@ namespace FlightSimulatorApp
             {
                 case 0:
                     {
-                        send = "set /controls/engines/current-engine/throttle" + value;
+                        send = "set /controls/engines/current-engine/throttle " + value;
                         break;
                     }
                 case 1:
                     {
-                        send = "set /controls/flight/elevator" + value;
+                        send = "set /controls/flight/elevator " + value;
                         break;
                     }
                 case 2:
                     {
-                        send = "set /controls/flight/rudder" + value;
+                        send = "set /controls/flight/rudder " + value;
                         break;
                     }
                 case 3:
                     {
-                        send = "set /controls/flight/aileron" + value;
+                        send = "set /controls/flight/aileron " + value;
                         break;
                     }
             }
-            telnetClient.Write(send);
+            lock (balancelock)
+            {
+                this.msg_to_send.Add(send + " \r\n");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +27,13 @@ namespace FlightSimulatorApp
 
         }
         //propreties
-
+        public string VM_Errors
+        {
+            get
+            {
+                return model.Errors;
+            }
+        }
         public double VM_Latitude_deg
         {
             get

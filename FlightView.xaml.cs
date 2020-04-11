@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,9 +39,10 @@ namespace FlightSimulatorApp
             if (location_of_pushpin.Visibility == Visibility.Visible)
             {
                 location_of_pushpin.Visibility = Visibility.Hidden;
-                locationButton.Content =  "   SHOW\nLOCATION";
+                locationButton.Content = "   SHOW\nLOCATION";
 
-            } else if (location_of_pushpin.Visibility == Visibility.Hidden)
+            }
+            else if (location_of_pushpin.Visibility == Visibility.Hidden)
             {
                 location_of_pushpin.Visibility = Visibility.Visible;
                 locationButton.Content = "    HIDE\nLOCATION";
@@ -49,7 +50,7 @@ namespace FlightSimulatorApp
         }
 
         private void log_out_Click(object sender, RoutedEventArgs e)
-         {
+        {
             vm.disconnect();
             if (this.NavigationService.CanGoBack)
             {

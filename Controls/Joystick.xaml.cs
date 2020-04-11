@@ -21,12 +21,16 @@ namespace FlightSimulatorApp.Controls
     /// </summary>
     public partial class Joystick : UserControl
     {
-        private double x;
-        private double y;
+        private double toX, toY;
+        private Point knobCenter;
         private Point elipsePoint;
+        private volatile bool mousePressed;
         public Joystick()
         {
             InitializeComponent();
+            knobCenter = new Point(this.Base.Width / 2, this.Base.Height / 2);
+            toX = knobCenter.X;
+            toY = knobCenter.Y;
         }
         public double NormalX
         {
@@ -50,11 +54,6 @@ namespace FlightSimulatorApp.Controls
             DependencyProperty.Register("NormalY", typeof(double), typeof(Joystick), new PropertyMetadata((double)0));
 
 
-        private void CenterKnob_Completed(object sender, EventArgs e)
-        {
-            Storyboard sb = (Storyboard)this.FindResource(this);
-        }
-
         private double length(double x, double y, double x1, double y1)
         {
             return Math.Sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
@@ -64,19 +63,28 @@ namespace FlightSimulatorApp.Controls
         {
             double x1;
             double y1;
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (this.mousePressed)
             {
-                x1 = e.GetPosition(this).X - x;
-                y1 = e.GetPosition(this).Y - y;
+                toX = e.GetPosition(this.Base).X - knobCenter.X;
+                toY = e.GetPosition(this.Base).Y - knobCenter.Y;
                 this.elipsePoint = e.GetPosition(this.border);
-                if (length(x1, y1, 0, 0) < Base.Width / 3)
+                if (inBound())
                 {
-                    knobPosition.X = x1;
-                    knobPosition.Y = y1;
-                    this.joystickValueTranslation();
+                    moveKnob();
+                }
+                else
+                {
+                    moveKnobToCenter();
                 }
             }
         }
+
+        private bool inBound()
+        {
+            double bound = Math.Pow(toX / (this.border.Width / 2), 2) + Math.Pow(toY / (this.border.Height / 2), 2);
+            return bound <= 1;
+        }
+
         private void joystickValueTranslation()
         {
             double borderRadius = this.border.Width / 2;
@@ -88,17 +96,36 @@ namespace FlightSimulatorApp.Controls
 
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                x = e.GetPosition(this).X;
-                y = e.GetPosition(this).Y;
-            }
+            this.mousePressed = true;
         }
 
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            knobPosition.X = 0;
-            knobPosition.Y = 0;
+            if (this.mousePressed)
+            {
+                this.moveKnobToCenter();
+            }
+        }
+
+        private void moveKnob()
+        {
+            Storyboard sb = this.Knob.Resources["MoveKnob"] as Storyboard;
+            DoubleAnimation animX = sb.Children[0] as DoubleAnimation;
+            DoubleAnimation animY = sb.Children[1] as DoubleAnimation;
+            animX.To = toX;
+            animY.To = toY;
+            sb.Begin();
+            animX.From = toX;
+            animY.From = toY;
+            this.joystickValueTranslation();
+        }
+
+        private void moveKnobToCenter()
+        {
+            this.mousePressed = false;
+            toX = 0;
+            toY = 0;
+            this.moveKnob();
         }
     }
 }
