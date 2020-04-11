@@ -158,5 +158,11 @@
   <ItemGroup>
     <Resource Include="Controls\backgroundPanel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\baloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\baloon3.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

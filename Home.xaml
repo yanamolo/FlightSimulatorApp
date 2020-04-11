@@ -6,12 +6,12 @@
       xmlns:local="clr-namespace:FlightSimulatorApp"
       xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="900"
+      d:DesignHeight="608.727" d:DesignWidth="900"
       Title="Home"
 Height="{Binding SystemParameters.PrimaryScreenHeight}"
       Width="{Binding SystemParameters.PrimaryScreenWidth}">
     <Grid>
-        <Canvas RenderTransformOrigin="0.49, 0.502">
+        <Canvas RenderTransformOrigin="0.49, 0.502" Margin="0,0,0,-0.2">
 
             <TextBlock FontSize="100" HorizontalAlignment="Center" Margin="38,10,43.667,442.333" Width="808" RenderTransformOrigin="0.5,0.5"
                    FontFamily="Segoe UI Black" FontWeight="ExtraBold" TextAlignment="Center" LineHeight="10" Foreground="#FF000C68" Grid.ColumnSpan="2">
@@ -52,7 +52,16 @@ Height="{Binding SystemParameters.PrimaryScreenHeight}"
                HorizontalAlignment="Center" Width="175" Grid.Column="1" Canvas.Left="715" Canvas.Top="475" RenderTransformOrigin="0,1" ClipToBounds="True"/>
 
             <Canvas.Background>
-                <ImageBrush ImageSource="homeBackground.png" TileMode="Tile"/>
+                <ImageBrush ImageSource="homeBackground.png">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
             </Canvas.Background>
         </Canvas>
     </Grid>
