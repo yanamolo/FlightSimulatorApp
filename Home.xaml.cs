@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FlightSimulatorApp
 {
@@ -24,28 +25,42 @@ namespace FlightSimulatorApp
         FlightModel model;
         VMFlight vm;
         FlightView view;
+        DispatcherTimer timer;
+
         public Home()
         {
             InitializeComponent();
             model = new FlightModel();
             vm = new VMFlight(model);
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0,0,3);
 
         }
 
-        /* private void Joystick_Loaded(object sender, RoutedEventArgs e)
-         {
+        // The timer event handler
+        void Timer_Tick(object sender, EventArgs e)
+        {
+            errorLable.Visibility = Visibility.Hidden;
+        }
 
-         }*/
-
-        private void login_Click(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             if ((String.IsNullOrWhiteSpace(IP.Text)) || (String.IsNullOrWhiteSpace(Port.Text)))
             {
                 this.errorLable.Content = "Missing IP or Port";
+                this.errorLable.FontSize = 30;
+                this.errorLable.Visibility = Visibility.Visible;
+                timer.Tick += Timer_Tick;
+                timer.Start();
+
             }
-            else if (!isValidIP(IP.Text) || !isValidPort(Port.Text))
+            else if (!IsValidIP(IP.Text) || !IsValidPort(Port.Text))
             {
                 this.errorLable.Content = "Invalid Input";
+                this.errorLable.FontSize = 30;
+                this.errorLable.Visibility = Visibility.Visible;
+                timer.Tick += Timer_Tick;
+                timer.Start();
             }
             else
             {
@@ -61,12 +76,16 @@ namespace FlightSimulatorApp
                 catch (Exception exception)
                 {
                     this.errorLable.Content = "Server is not connected";
+                    this.errorLable.Visibility = Visibility.Visible;
+                    this.errorLable.FontSize = 24;
+                    timer.Tick += Timer_Tick;
+                    timer.Start();
                 }
 
             }
         }
 
-        private static bool isValidIP(string ip)
+        private static bool IsValidIP(string ip)
         {
             string[] ipArr = ip.Split(".".ToCharArray());
             if (ipArr.Length != 4)
@@ -92,7 +111,7 @@ namespace FlightSimulatorApp
             return true;
         }
 
-        private static bool isValidPort(string port)
+        private static bool IsValidPort(string port)
         {
             try
             {
@@ -109,7 +128,7 @@ namespace FlightSimulatorApp
             return true;
         }
 
-        private void default_Click(object sender, RoutedEventArgs e)
+        private void Default_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -125,6 +144,10 @@ namespace FlightSimulatorApp
             catch (Exception ex)
             {
                 this.errorLable.Content = "Server is not connected";
+                this.errorLable.Visibility = Visibility.Visible;
+                this.errorLable.FontSize = 24;
+                timer.Tick += Timer_Tick;
+                timer.Start();
             }
         }
     }

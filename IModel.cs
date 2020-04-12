@@ -9,11 +9,11 @@ namespace FlightSimulatorApp
 {
     interface IModel: INotifyPropertyChanged
     {
-        // connection to the robot
+        // Connection to the robot.
         void connect(string IP, int port);
         void disconnect();
         void start();
-        //propreties
+        //Propreties.
         double Indicated_heading_deg { set; get; }
         double Gps_indicated_vertical_speed { set; get; }
         double Gps_indicated_ground_speed_kt { set; get; }
@@ -26,10 +26,5 @@ namespace FlightSimulatorApp
         double Elevator { set; get; }
         double Rudder { set; get; }
         double Throttle { set; get; }
-        // activate actuators
-       // void moveAilrone();
-       // void moveElevator();
-      //  void moveRudder();
-      //  void moveThrottle();
     }
 }

@@ -165,5 +165,8 @@
   <ItemGroup>
     <Resource Include="Controls\baloon3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="BackgroundHome.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
