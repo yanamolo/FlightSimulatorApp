@@ -6,9 +6,9 @@
       xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
       xmlns:local="clr-namespace:FlightSimulator"
       mc:Ignorable="d" 
-      d:DesignHeight="514" d:DesignWidth="872" Title="FlightSimulator">
-    <Grid>
-        <Canvas>
+      d:DesignHeight="514" d:DesignWidth="872" Title="Flight Simulator">
+    <Grid  Width="872" Height="514">
+        <Canvas Width="872" Height="514">
             <Canvas.Background>
                 <ImageBrush ImageSource="viewBackground.png"/>
             </Canvas.Background>
@@ -31,12 +31,15 @@
             </Border>
             <Border Background="#FF323748" x:Name="location_of_pushpin" CornerRadius="15" Height="51" Canvas.Left="13" Canvas.Top="463" Width="303" Visibility="Hidden">
                 <TextBlock  Foreground="white" FontSize="18" Margin="10,0,-16.2,0" Background="{x:Null}" Height="51" VerticalAlignment="Top" FontWeight="Bold">
-                <Run Text="Latitude: "></Run>
+                <Run Text="Latitude:    "></Run>
                 <Run Text="{Binding VM_Latitude_deg, Mode=OneWay}"></Run>
                 <Run Text="&#xD;&#xA;Longitude: "></Run>
                 <Run Text="{Binding VM_Longitude_deg, Mode=OneWay}"></Run>
                 </TextBlock>
             </Border>
+            <Label x:Name="ClientDisconnected" Content="{Binding VM_Errors, Mode=OneWay}" Foreground="Red" FontSize="28" Height="48" Width="488" Canvas.Left="25" Canvas.Top="220" FontWeight="Bold"/>
+            <Label x:Name="latitude_invalid" Content="{Binding VM_Errors_latitude, Mode=OneWay}" Foreground="Red" FontSize="28" Height="48" Width="488" Canvas.Left="25" Canvas.Top="273" FontWeight="Bold"/>
+            <Label x:Name="longitude_invalid" Content="{Binding VM_Errors_longitude, Mode=OneWay}" Foreground="Red" FontSize="28" Height="48" Width="488" Canvas.Left="25" Canvas.Top="321" FontWeight="Bold"/>
         </Canvas>
     </Grid>
 </Page>

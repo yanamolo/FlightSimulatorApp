@@ -33,6 +33,34 @@ namespace FlightSimulatorApp
             {
                 return model.Errors;
             }
+            set
+            {
+                model.Errors = value;
+            }
+        }
+        public string VM_Errors_latitude
+        {
+            get
+            {
+                return model.Errors_latitude;
+            }
+            set
+            {
+                model.Errors_latitude = value;
+            }
+
+        }
+        public string VM_Errors_longitude
+        {
+            get
+            {
+                return model.Errors_longitude;
+            }
+            set
+            {
+                model.Errors_longitude = value;
+            }
+
         }
         public double VM_Latitude_deg
         {

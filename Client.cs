@@ -39,6 +39,7 @@ namespace FlightSimulatorApp
             this.client.Close();
         }
 
+        
         public void Write(string data)
         {
             if (this.isConnected())

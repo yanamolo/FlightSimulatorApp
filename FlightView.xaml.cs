@@ -34,6 +34,9 @@ namespace FlightSimulatorApp
             this.Bing_Map.DataContext = vm;
             this.JoystickSliders.DataContext = vm;
         }
+
+        // Changing the visibility of the location textBox.
+        // Change the button according to the state of the visibility.
         private void locationButton_Click(object sender, RoutedEventArgs e)
         {
             if (location_of_pushpin.Visibility == Visibility.Visible)
@@ -49,8 +52,21 @@ namespace FlightSimulatorApp
             }
         }
 
+        // Disconnect the server and go back to Home page
         private void log_out_Click(object sender, RoutedEventArgs e)
         {
+            if(vm.VM_Errors != "")
+            {
+                vm.VM_Errors = "";
+            }
+            if (vm.VM_Errors_latitude != "")
+            {
+                vm.VM_Errors_latitude = "";
+            }
+            if (vm.VM_Errors_longitude != "")
+            {
+                vm.VM_Errors_longitude = "";
+            }
             vm.disconnect();
             if (this.NavigationService.CanGoBack)
             {

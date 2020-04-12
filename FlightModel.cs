@@ -11,15 +11,17 @@ namespace FlightSimulatorApp
         List<string> msg_to_send;
         IClient telnetClient;
         volatile bool stop;
-        //Propreties
+
+        //Propreties.
         private string errors;
+        private string errors_latitude;
+        private string errors_longitude;
 
         private double latitude_deg;
         private double longitude_deg;
         private string latitude;
         private string longitude;
         private string coardinates;
-
 
         private double ailrone;
         private double elevator;
@@ -34,6 +36,7 @@ namespace FlightSimulatorApp
         private double attitude_indicator_internal_roll_deg;
         private double attitude_indicator_internal_pitch_deg;
         private double altimeter_indicated_altitude_ft;
+
         public FlightModel()
         {
             stop = false;
@@ -44,7 +47,6 @@ namespace FlightSimulatorApp
         {
             this.telnetClient = telnetClient;
         }
-
 
         public void connect(string ip, int port)
         {
@@ -58,6 +60,9 @@ namespace FlightSimulatorApp
             telnetClient.Disconnect();
         }
 
+        // While server is open and connected read data as follows-
+        // Write a massage with the right order of getting a certain data.
+        // Read into that data property the information. Transform to Double type if its needed.
         public void start()
         {
             new Thread(delegate ()
@@ -80,6 +85,8 @@ namespace FlightSimulatorApp
                             }
                         }
 
+                        // Save a string field and a double property of latitude and logitude.
+                        // In the end save a string of full Coardinates property.
                         telnetClient.Write("get /position/latitude-deg\r\n");
                         latitude = telnetClient.Read();
                         Latitude_deg = Double.Parse(latitude);
@@ -110,7 +117,7 @@ namespace FlightSimulatorApp
                     catch
                     {
                         this.disconnect();
-                        Errors = "Server Disconnected";
+                        Errors = "Server Disconnected, please log out";
                     }
                 }
             }).Start();
@@ -125,6 +132,85 @@ namespace FlightSimulatorApp
             {
                 this.errors = value;
                 NotifyPropertyChanged("Errors");
+            }
+        }
+        public string Errors_latitude
+        {
+            get
+            {
+                return this.errors_latitude;
+            }
+            set
+            {
+                this.errors_latitude = value;
+                NotifyPropertyChanged("Errors_latitude");
+            }
+        }
+        public string Errors_longitude
+        {
+            get
+            {
+                return this.errors_longitude;
+            }
+            set
+            {
+                this.errors_longitude = value;
+                NotifyPropertyChanged("Errors_longitude");
+            }
+        }
+        public double Latitude_deg
+        {
+            get
+            {
+                return latitude_deg;
+            }
+            set
+            {
+                if ((value <= 180) && (value >= -180))
+                {
+                    latitude_deg = value;
+                    latitude = latitude.Substring(0, latitude.Length - 1);
+                }
+                else if (latitude_deg == 0)
+                {
+                    latitude_deg = 32.0055;
+                    latitude = "32.0055";
+                    Errors_longitude = "Longitude is out of Range";
+
+                }
+                else
+                {
+                    latitude = latitude_deg.ToString();
+                    Errors_latitude = "Latitude is out of Range";
+                }
+                NotifyPropertyChanged("Latitude_deg");
+            }
+        }
+        public double Longitude_deg
+        {
+            get
+            {
+                return longitude_deg;
+            }
+            set
+            {
+                if ((value <= 90) && (value >= -90))
+                {
+                    longitude_deg = value;
+                    longitude = longitude.Substring(0, longitude.Length - 1);
+                }
+                else if (longitude_deg == 0)
+                {
+                    longitude_deg = 34.8854;
+                    longitude = "34.8854";
+                    Errors_longitude = "Longitude is out of Range";
+                }
+                else
+                {
+                    longitude = longitude_deg.ToString();
+                    Errors_longitude = "Longitude is out of Range";
+                }
+                NotifyPropertyChanged("Longitude_deg");
             }
         }
         public string Coardinates
@@ -304,54 +390,6 @@ namespace FlightSimulatorApp
                     throttle = value;
                 }
                 setProperty(value, 0);
-            }
-        }
-        public double Latitude_deg
-        {
-            get
-            {
-                return latitude_deg;
-            }
-            set
-            {
-                if ((value <= 90) && (value >= -90))
-                {
-                    latitude_deg = value;
-                    latitude = latitude.Substring(0, latitude.Length - 1);
-                    NotifyPropertyChanged("Latitude_deg");
-                }
-                else if (latitude_deg == 0)
-                {
-
-                }
-                else
-                {
-                    latitude = latitude_deg.ToString();
-                }
-            }
-        }
-        public double Longitude_deg
-        {
-            get
-            {
-                return longitude_deg;
-            }
-            set
-            {
-                if ((value <= 180) && (value >= -180))
-                {
-                    longitude_deg = value;
-                    longitude = longitude.Substring(0, longitude.Length - 1);
-                    NotifyPropertyChanged("Longitude_deg");
-                }
-                else if (longitude_deg == 0)
-                {
-
-                }
-                else
-                {
-                    longitude = longitude_deg.ToString();
-                }
             }
         }
 
