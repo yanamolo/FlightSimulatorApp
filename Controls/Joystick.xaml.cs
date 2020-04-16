@@ -28,6 +28,7 @@ namespace FlightSimulatorApp.Controls
         public Joystick()
         {
             InitializeComponent();
+            // Creating the initialized x and y of the joystick.
             knobCenter = new Point(this.Base.Width / 2, this.Base.Height / 2);
             toX = knobCenter.X;
             toY = knobCenter.Y;
@@ -61,10 +62,9 @@ namespace FlightSimulatorApp.Controls
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            double x1;
-            double y1;
             if (this.mousePressed)
             {
+                // Placing the new x and y that we got from the mouse move.
                 toX = e.GetPosition(this.Base).X - knobCenter.X;
                 toY = e.GetPosition(this.Base).Y - knobCenter.Y;
                 this.elipsePoint = e.GetPosition(this.border);
@@ -81,17 +81,21 @@ namespace FlightSimulatorApp.Controls
 
         private bool inBound()
         {
+            // Checking if the new x and y points of the knob are in bound using an ellipse formula.
             double bound = Math.Pow(toX / (this.border.Width / 2), 2) + Math.Pow(toY / (this.border.Height / 2), 2);
             return bound <= 1;
         }
 
         private void joystickValueTranslation()
         {
+            // Normalizing the x and y points by subtructing the ellipse center from the elipse point
+            // which is the border ellipse, and dividing the result with the border radiuse.
             double borderRadius = this.border.Width / 2;
-            double normalX = (this.knobPosition.X - this.elipsePoint.X) / borderRadius;
-            double normalY = (this.knobPosition.Y - this.elipsePoint.Y) / borderRadius;
+            Point ellipseCenter = new Point(this.border.Width / 2, this.border.Height / 2);
+            double normalX = (this.elipsePoint.X - ellipseCenter.X) / borderRadius;
+            double normalY = (this.elipsePoint.Y - ellipseCenter.Y) / borderRadius;
             this.NormalX = normalX;
-            this.NormalY = normalY;
+            this.NormalY = -normalY;
         }
 
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
@@ -109,6 +113,7 @@ namespace FlightSimulatorApp.Controls
 
         private void moveKnob()
         {
+            // Activating the animation of the knob.
             Storyboard sb = this.Knob.Resources["MoveKnob"] as Storyboard;
             DoubleAnimation animX = sb.Children[0] as DoubleAnimation;
             DoubleAnimation animY = sb.Children[1] as DoubleAnimation;

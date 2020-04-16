@@ -25,16 +25,16 @@ namespace FlightSimulatorApp.Controls
         public Bing_Map()
         {
             InitializeComponent();
-            myMap.ViewChangeOnFrame += new EventHandler<MapEventArgs>(myMap_ViewChangeOnFrame);
+            myMap.ViewChangeOnFrame += new EventHandler<MapEventArgs>(MyMap_ViewChangeOnFrame);
         }
 
-        public void myMap_ViewChangeOnFrame(object sender, MapEventArgs e)
+        public void MyMap_ViewChangeOnFrame(object sender, MapEventArgs e)
         {
-            //Gets the map that raised this event
+            // Gets the map that raised this event
             Map map = (Map)sender;
-            //Gets the bounded rectangle for the current frame
+            // Gets the bounded rectangle for the current frame
             LocationRect bounds = map.BoundingRectangle;
-            //Update the current latitude and longitude
+            // Update the current latitude and longitude
             CurrentPosition.Text += String.Format("Northwest: {0:F5}, Southeast: {1:F5} (Current)", bounds.Northwest, bounds.Southeast);
         }
 
