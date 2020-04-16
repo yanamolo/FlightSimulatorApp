@@ -26,7 +26,7 @@ namespace FlightSimulatorApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
 
         }
-        //propreties
+        // Propreties, creating the connection between the view and the model.
         public string VM_Errors
         {
             get

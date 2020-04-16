@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
-namespace FlightSimulatorApp
+namespace FlightSimulatorApp.Controls
 {
-    using FlightSimulatorApp.Controls;
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for controlsDisplay.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class controlsDisplay : UserControl
     {
-        Home home;
-        
-        public MainWindow()
+        public controlsDisplay()
         {
             InitializeComponent();
-            home = new Home();
-
-            Navigate(home);
         }
     }
 }

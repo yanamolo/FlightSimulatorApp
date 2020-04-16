@@ -13,5 +13,6 @@ namespace FlightSimulatorApp
         string Read();
         void Disconnect();
         void flush();
+        bool isConnected();
     }
 }

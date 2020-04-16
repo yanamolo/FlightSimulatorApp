@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="FlightSimulatorApp.Controls.JoystickSliders"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
+             xmlns:local="clr-namespace:FlightSimulatorApp.Controls"
+             mc:Ignorable="d" FontSize="30" Height="563.6" Width="584.4">
+    <Grid Margin="0,37,10.4,-0.4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="182.4" />
+            <ColumnDefinition Width="217.6" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="62.2"/>
+            <RowDefinition Height="17.8"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label VerticalAlignment="Center" FontWeight="Bold" Margin="10,21,66,9" Height="50" Grid.Row="1">Throttle</Label>
+        <Slider x:Name="throttle" Margin="44,27,106,79.4" Grid.Row="2" Grid.RowSpan="5" VerticalAlignment="Center"
+                Maximum="1" Minimum="0" SmallChange="0.01" LargeChange="0.1" Orientation="Vertical"
+                TickPlacement="BottomRight" TickFrequency="0.1" MinWidth="20" MinHeight="300" MaxHeight="350"
+                IsMoveToPointEnabled="True" Value="{Binding VM_Throttle}" FontWeight="ExtraBlack"
+                Background="#FF323748" Height="300"/>
+        <TextBox Grid.Row="1" Height="30" VerticalAlignment="Center" Margin="33,71,106,59" FontSize="17" Grid.RowSpan="2" BorderBrush="#FF395FD1" BorderThickness="3" FontWeight="Bold" Text="{Binding ElementName=throttle, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label VerticalAlignment="Center" Grid.Row="6" Margin="90,88,190,30.4" FontWeight="Bold" FontStyle="Normal" Grid.ColumnSpan="2" Height="48">Rudder</Label>
+        <Slider x:Name="rudder" Grid.ColumnSpan="3" Grid.Row="6" Margin="78,141,124.4,10.4"
+                HorizontalAlignment="Center" Maximum="1" Minimum="-1" SmallChange="0.01"
+                LargeChange="0.1" Orientation="Horizontal" TickPlacement="BottomRight" TickFrequency="0.1" 
+                MaxWidth="350" MinWidth="300" MinHeight="20" IsMoveToPointEnabled="True" Value="{Binding VM_Rudder}" Background="#FF323748" Width="380" Grid.RowSpan="2"/>
+        <TextBox Grid.Row="6" Height="30" VerticalAlignment="Center" Margin="9,102,126,34.4" FontSize="17" Grid.Column="1" BorderBrush="#FF395FD1" FontWeight="Bold" BorderThickness="3" Text="{Binding ElementName=rudder, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+        <Controls:Joystick Grid.RowSpan="6" Margin="115,37,150.4,79.4" NormalX="{Binding VM_Ailrone, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"  NormalY="{Binding VM_Elevator, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3" Grid.Row="1" />
+        
+    </Grid>
+</UserControl>

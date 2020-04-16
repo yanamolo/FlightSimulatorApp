@@ -9,11 +9,11 @@ namespace FlightSimulatorApp
 {
     interface IModel: INotifyPropertyChanged
     {
-        // Connection to the robot.
+        // Connection to the server.
         void connect(string IP, int port);
         void disconnect();
         void start();
-        //Propreties.
+        // Propreties.
         double Indicated_heading_deg { set; get; }
         double Gps_indicated_vertical_speed { set; get; }
         double Gps_indicated_ground_speed_kt { set; get; }

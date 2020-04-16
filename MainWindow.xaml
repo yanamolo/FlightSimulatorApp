@@ -6,5 +6,5 @@
         xmlns:Controls="clr-namespace:FlightSimulatorApp.Controls"
         xmlns:local="clr-namespace:FlightSimulatorApp"
                   
-        Title="Flight Simulator" Icon="icon.png" Width="880" Height="580">
+        Title="Flight Simulator" Icon="icon.png" Width="880" Height="580" ShowsNavigationUI="False">
 </NavigationWindow>

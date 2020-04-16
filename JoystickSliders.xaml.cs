@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightSimulatorApp
+namespace FlightSimulatorApp.Controls
 {
-    using FlightSimulatorApp.Controls;
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for JoystickSliders.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class JoystickSliders : UserControl
     {
-        Home home;
-        
-        public MainWindow()
+        public JoystickSliders()
         {
             InitializeComponent();
-            home = new Home();
+        }
 
-            Navigate(home);
+        private void throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }

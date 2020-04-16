@@ -12,11 +12,10 @@ namespace FlightSimulatorApp
 
     public class Client : IClient
     {
-        /// <summary>The size</summary>
         private const short Size = 512;
 
-        /// <summary>The client</summary>
         private TcpClient client;
+        private NetworkStream ns;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         public Client()
@@ -27,6 +26,8 @@ namespace FlightSimulatorApp
         public void Connect(string ip, int port)
         {
             this.client.Connect(IPAddress.Parse(ip), port);
+            this.ns = this.client.GetStream();
+            this.ns.ReadTimeout = 10000;
         }
 
         public bool isConnected()
@@ -44,9 +45,9 @@ namespace FlightSimulatorApp
         {
             if (this.isConnected())
             {
-                NetworkStream networkStream = this.client.GetStream();
+                
                 byte[] sendBytes = Encoding.ASCII.GetBytes(data);
-                networkStream.Write(sendBytes, 0, sendBytes.Length);
+                ns.Write(sendBytes, 0, sendBytes.Length);
             }
         }
 
@@ -56,15 +57,22 @@ namespace FlightSimulatorApp
         }
         public string Read()
         {
-            if (this.isConnected())
+            try
             {
-                NetworkStream ns = this.client.GetStream();
-                byte[] dataBytes = new byte[Size];
-                int bytesRead = ns.Read(dataBytes, 0, Size);
-                string dataToSend = Encoding.ASCII.GetString(dataBytes, 0, bytesRead);
-                return dataToSend;
+
+                if (this.isConnected())
+                {
+                    byte[] dataBytes = new byte[Size];
+                    int bytesRead = ns.Read(dataBytes, 0, Size);
+                    string dataToSend = Encoding.ASCII.GetString(dataBytes, 0, bytesRead);
+                    return dataToSend;
+                }
             }
-            throw new Exception("Client disconnected, turn FlightGear on and press connect");
+            catch
+            {
+                throw new TimeoutException("Server is a bit slow");
+            }
+            return null;
         }
     }
 }
