@@ -31,3 +31,8 @@ To properly use this _batch script_ you should download the repository content w
 
 ## Python Script
 We provide a python script called_dummyServer_ which acts as a FlightGear server. We used this _dummyServer_ while building the project to speed up development.
+
+![FlightGearApp](https://github.com/yanamolo/FlightSimulatorApp/blob/master/BackgroundHome.png)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIwNDE0Njk4NTZdfQ==
+-->
